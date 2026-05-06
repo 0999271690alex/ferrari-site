@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Команда — Ferrari F1</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── TEAM PAGE SPECIFIC STYLES ── */
+    .team-hero {
+      min-height: 70vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .team-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35);
+    }
+    .team-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .team-hero-content h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .team-hero-content h1 span { color: var(--ferrari-red); }
+    .team-hero-content p {
+      font-size: 1.1rem;
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── SEASON STRIP ── */
+    .season-strip {
+      background: var(--ferrari-red);
+      padding: 18px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .season-strip .item {
+      text-align: center;
+    }
+    .season-strip .item .val {
+      font-size: 1.6rem;
+      font-weight: 900;
+      display: block;
+    }
+    .season-strip .item .lbl {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* ── DRIVER SECTION ── */
+    .driver-section {
+      padding: 100px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .driver-section.reverse { direction: rtl; }
+    .driver-section.reverse > * { direction: ltr; }
+
+    .driver-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .driver-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 300px 200px;
+      gap: 12px;
+    }
+    .driver-photos .photo-main {
+      grid-column: 1 / -1;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .driver-photos .photo-sm {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .driver-photos img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .driver-photos img:hover { transform: scale(1.04); }
+
+    .driver-info { padding: 10px 0; }
+    .driver-number {
+      font-size: 8rem;
+      font-weight: 900;
+      color: var(--ferrari-red);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: -30px;
+      display: block;
+    }
+    .driver-name {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .driver-country {
+      color: var(--ferrari-red);
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .driver-bio {
+      color: #999;
+      line-height: 1.9;
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+    .driver-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .driver-stat {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .driver-stat .sv {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      display: block;
+    }
+    .driver-stat .sk {
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .driver-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: rgba(204,0,0,0.12);
+      border: 1px solid rgba(204,0,0,0.3);
+      color: var(--ferrari-red);
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* ── DIVIDER ── */
+    .team-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #333, transparent);
+      margin: 0 60px;
+    }
+
+    /* ── PRINCIPAL SECTION ── */
+    .principal-section {
+      padding: 80px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .principal-photo {
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .principal-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .principal-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(204,0,0,0.2), transparent);
+      pointer-events: none;
+    }
+    .principal-role {
+      color: var(--ferrari-red);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .principal-name {
+      font-size: 2.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .principal-quote {
+      font-size: 1.1rem;
+      color: #ccc;
+      font-style: italic;
+      line-height: 1.8;
+      border-left: 3px solid var(--ferrari-red);
+      padding-left: 24px;
+      margin-bottom: 24px;
+    }
+    .principal-bio { color: #888; line-height: 1.9; }
+
+    /* ── CAR SECTION ── */
+    .car-section {
+      padding: 80px 60px;
+      background: #050505;
+    }
+    .car-section-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .car-main-photo {
+      width: 100%;
+      height: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 40px 0;
+      position: relative;
+    }
+    .car-main-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .car-main-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 50%, rgba(0,0,0,0.3) 100%);
+    }
+    .car-main-photo .car-label {
+      position: absolute;
+      bottom: 40px;
+      left: 50px;
+      z-index: 2;
+    }
+    .car-label h3 {
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .car-label p { color: #aaa; }
+    .car-specs-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .car-spec-box {
+      background: #111;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .car-spec-box .csv {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--ferrari-red);
+      display: block;
+    }
+    .car-spec-box .csk {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* ── GALLERY ── */
+    .team-gallery {
+      padding: 80px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 250px 250px;
+      gap: 14px;
+      margin-top: 40px;
+    }
+    .gallery-masonry .g-item {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .gallery-masonry .g-item.tall {
+      grid-row: span 2;
+    }
+    .gallery-masonry .g-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-masonry .g-item:hover img { transform: scale(1.06); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .driver-layout { grid-template-columns: 1fr; }
+      .driver-section { padding: 60px 20px; }
+      .driver-section.reverse { direction: ltr; }
+      .principal-section { grid-template-columns: 1fr; padding: 60px 20px; }
+      .car-specs-row { grid-template-columns: repeat(2, 1fr); }
+      .car-section { padding: 60px 20px; }
+      .gallery-masonry { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+      .gallery-masonry .g-item.tall { grid-row: span 1; }
+      .team-gallery { padding: 60px 20px; }
+      .season-strip { gap: 30px; padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">F</div>
+    <span>Ferrari</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Головна</a></li>
+    <li><a href="models.html">Моделі</a></li>
+    <li><a href="history.html">Історія</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="technologies.html">Технології</a></li>
+    <li><a href="team.html" class="active">Команда F1</a></li>
+    <li><a href="contact.html">Контакти</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="team-hero">
+  <div class="team-hero-bg"></div>
+  <div class="team-hero-content">
+    <div class="section-label">Сезон 2025</div>
+    <h1>Scuderia<br><span>Ferrari HP</span></h1>
+    <p>Найстаріша і найтитулованіша команда у Формулі 1. Червоний колір, страсть, перемоги.</p>
+  </div>
+</section>
+
+<!-- SEASON STRIP -->
+<div class="season-strip">
+  <div class="item"><span class="val">16</span><span class="lbl">Чемпіонати F1</span></div>
+  <div class="item"><span class="val">243</span><span class="lbl">Перемог у GP</span></div>
+  <div class="item"><span class="val">2</span><span class="lbl">Гонщики 2025</span></div>
+  <div class="item"><span class="val">1950</span><span class="lbl">Перший старт</span></div>
+  <div class="item"><span class="val">Маранелло</span><span class="lbl">Штаб-квартира</span></div>
+</div>
+
+<!-- CHARLES LECLERC -->
+<section class="driver-section">
+  <div class="section-label">Гонщик #16</div>
+  <h2 class="section-title" style="margin-bottom:50px;">Charles Leclerc</h2>
+  <div class="driver-layout">
+
+    <div class="driver-photos">
+      <div class="photo-main">
+        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?w=800&q=80" alt="Charles Leclerc">
+      </div>
+      <div class="photo-sm">
+        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=400&q=80" alt="Leclerc in action">
+      </div>
+      <div class="photo-sm">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80" alt="Ferrari F1">
+      </div>
+    </div>
+
+    <div class="driver-info">
+      <span class="driver-number">16</span>
+      <div class="driver-name">Charles<br>Leclerc</div>
+      <div class="driver-country">🇲🇨 Монако · Народився: 16.10.1997</div>
+      <p class="driver-bio">
+        Шарль Леклер — монегаський гонщик Формули 1, один з найяскравіших талантів сучасної епохи. З 2019 року виступає за Scuderia Ferrari, ставши справжнім улюбленцем команди та тіфозі. Відомий своєю агресивною технікою кваліфікації та стрімкими обгонами в гонці.
+      </p>
+      <div class="driver-stats">
+        <div class="driver-stat"><span class="sv">8</span><span class="sk">Перемог</span></div>
+        <div class="driver-stat"><span class="sv">35</span><span class="sk">Подіумів</span></div>
+        <div class="driver-stat"><span class="sv">26</span><span class="sk">Поулів</span></div>
+      </div>
+      <div class="driver-badges">
+        <span class="badge">Монако GP 2024</span>
+        <span class="badge">Сингапур GP 2023</span>
+        <span class="badge">Бахрейн GP 2022</span>
+        <span class="badge">Лідер Ferrari</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="team-divider"></div>
+
+<!-- LEWIS HAMILTON -->
+<section class="driver-section reverse">
+  <div class="section-label">Гонщик #44</div>
+  <h2 class="section-title" style="margin-bottom:50px;">Lewis Hamilton</h2>
+  <div class="driver-layout">
+
+    <div class="driver-info">
+      <span class="driver-number">44</span>
+      <div class="driver-name">Lewis<br>Hamilton</div>
+      <div class="driver-country">🇬🇧 Велика Британія · Народився: 07.01.1985</div>
+      <p class="driver-bio">
+        Льюїс Хемілтон — 7-разовий чемпіон світу Формули 1, один з найвеличніших гонщиків в історії автоспорту. У 2025 році він здійснив неймовірний крок — перейшов до Scuderia Ferrari, про що мріяв з дитинства. Це злиття двох легенд стало найгучнішою подією сезону.
+      </p>
+      <div class="driver-stats">
+        <div class="driver-stat"><span class="sv">7</span><span class="sk">Чемпіонати</span></div>
+        <div class="driver-stat"><span class="sv">103</span><span class="sk">Перемог</span></div>
+        <div class="driver-stat"><span class="sv">104</span><span class="sk">Поулів</span></div>
+      </div>
+      <div class="driver-badges">
+        <span class="badge">7× Чемпіон світу</span>
+        <span class="badge">Рекорд перемог</span>
+        <span class="badge">Рекорд поулів</span>
+        <span class="badge">Ferrari з 2025</span>
+      </div>
+    </div>
+
+    <div class="driver-photos">
+      <div class="photo-main">
+        <img src="https://images.unsplash.com/photo-1602052577122-f73b9710adba?w=800&q=80" alt="Lewis Hamilton">
+      </div>
+      <div class="photo-sm">
+        <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400&q=80" alt="Hamilton Ferrari">
+      </div>
+      <div class="photo-sm">
+        <img src="https://images.unsplash.com/photo-1605559911160-a3d95d213904?w=400&q=80" alt="F1 action">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="team-divider"></div>
+
+<!-- TEAM PRINCIPAL -->
+<section class="principal-section">
+  <div class="principal-photo">
+    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&q=80" alt="Frederic Vasseur">
+  </div>
+  <div>
+    <div class="principal-role">Керівник команди</div>
+    <div class="principal-name">Frédéric<br>Vasseur</div>
+    <blockquote class="principal-quote">
+      "Ferrari — це більше ніж команда. Це пристрасть мільйонів людей по всьому світу. Ми тут, щоб перемагати."
+    </blockquote>
+    <p class="principal-bio">
+      Фредерік Вассор очолив Scuderia Ferrari у 2023 році, прийшовши з Alfa Romeo. Французький інженер з величезним досвідом у Формулі 1 та Формулі 2, він відомий своєю здатністю будувати сильні команди та розвивати молодих пілотів. Саме він підписав контракт з Льюїсом Хемілтоном на сезон 2025.
+    </p>
+  </div>
+</section>
+
+<!-- CAR SECTION -->
+<section class="car-section">
+  <div class="car-section-inner">
+    <div class="section-label">Болід 2025</div>
+    <h2 class="section-title">Ferrari SF-25</h2>
+    <div class="car-main-photo">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="Ferrari SF-25 F1 Car">
+      <div class="car-label">
+        <h3>Ferrari SF-25</h3>
+        <p>Болід сезону 2025 · Формула 1</p>
+      </div>
+    </div>
+    <div class="car-specs-row">
+      <div class="car-spec-box">
+        <span class="csv">1.6L</span>
+        <span class="csk">V6 Гібрид</span>
+      </div>
+      <div class="car-spec-box">
+        <span class="csv">1000+</span>
+        <span class="csk">к.с.</span>
+      </div>
+      <div class="car-spec-box">
+        <span class="csv">798 кг</span>
+        <span class="csk">Мінімальна вага</span>
+      </div>
+      <div class="car-spec-box">
+        <span class="csv">350+</span>
+        <span class="csk">км/год макс.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="team-gallery">
+  <div class="section-label">Фотогалерея</div>
+  <h2 class="section-title">Команда в Дії</h2>
+  <div class="gallery-masonry">
+    <div class="g-item tall">
+      <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?w=600&q=80" alt="Ferrari F1">
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=600&q=80" alt="F1 race">
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1605559911160-a3d95d213904?w=600&q=80" alt="Ferrari team">
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1602052577122-f73b9710adba?w=600&q=80" alt="F1 action">
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80" alt="Ferrari car">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="logo-icon">F</div>
+        <span style="font-size:1.3rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;">Ferrari</span>
+      </div>
+      <p>Виробник спортивних автомобілів класу люкс з 1947 року.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Навігація</h4>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="models.html">Моделі</a></li>
+        <li><a href="history.html">Історія</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компанія</h4>
+      <ul>
+        <li><a href="technologies.html">Технології</a></li>
+        <li><a href="team.html">Команда F1</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакти</h4>
+      <ul>
+        <li><a href="#">Маранелло, Італія</a></li>
+        <li><a href="#">info@ferrari.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Ferrari S.p.A. Усі права захищені.</p>
+    <p>Маранелло, Модена, Італія</p>
+  </div>
+</footer>
+
+</body>
+</html>
