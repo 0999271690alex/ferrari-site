@@ -1079,14 +1079,22 @@ footer {
   background: var(--gray);
   border: 1px solid rgba(255,255,255,0.06);
   height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5rem;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all 0.4s;
+}
+
+.gallery-full-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gallery-full-item:hover img {
+  transform: scale(1.07);
 }
 
 .gallery-full-item:first-child,

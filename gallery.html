@@ -19,11 +19,18 @@
     .modal.open { display: flex; }
     .modal-content {
       text-align: center;
-      max-width: 600px;
+      max-width: 800px;
+      width: 90%;
     }
-    .modal-emoji { font-size: 10rem; margin-bottom: 20px; }
-    .modal-title { font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-    .modal-desc { color: #888; font-size: 0.95rem; line-height: 1.7; }
+    .modal-img {
+      width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .modal-title { font-size: 1.3rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    .modal-desc { color: #888; font-size: 0.9rem; line-height: 1.7; }
     .modal-close {
       position: absolute;
       top: 30px;
@@ -35,7 +42,7 @@
       border: none;
       transition: color 0.3s;
     }
-    .modal-close:hover { color: var(--red); }
+    .modal-close:hover { color: var(--ferrari-red); }
   </style>
 </head>
 <body>
@@ -69,7 +76,6 @@
   <div style="margin-bottom: 30px; display:flex; gap:12px; flex-wrap:wrap;">
     <button class="filter-btn active" onclick="filterGallery('all', this)">Усі</button>
     <button class="filter-btn" onclick="filterGallery('exterior', this)">Екстер'єр</button>
-    <button class="filter-btn" onclick="filterGallery('interior', this)">Інтер'єр</button>
     <button class="filter-btn" onclick="filterGallery('racing', this)">Гонки</button>
     <button class="filter-btn" onclick="filterGallery('classic', this)">Класика</button>
   </div>
@@ -77,57 +83,84 @@
   <div class="gallery-full-grid">
 
     <div class="gallery-full-item" data-category="exterior"
-         onclick="openModal('🏎️', 'Ferrari 296 GTB — Екстер\'єр', 'Гостра, агресивна форма 296 GTB народилася в аеродинамічній трубі. Кожна лінія виконує функцію — ні зайвого декору.')">
-      🏎️
+         data-img="https://images.unsplash.com/photo-1647801833770-025625b3ffd8?w=1200&q=90"
+         data-title="Ferrari 296 GTB — Екстер'єр"
+         data-desc="Гостра, агресивна форма 296 GTB народилася в аеродинамічній трубі. Кожна лінія виконує функцію — ні зайвого декору."
+         onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1647801833770-025625b3ffd8?w=800&q=80" alt="Ferrari 296 GTB">
       <div class="gallery-caption">Ferrari 296 GTB</div>
     </div>
 
-    <div class="gallery-full-item" data-category="interior"
-         onclick="openModal('🎛️', 'Кабіна SF90 Stradale', 'Інтер'єр SF90 поєднує кокпіт гоночного болида з преміальними матеріалами. Центральний тунель, карбонові вставки та цифровий дисплей — все під рукою.')">
-      🎛️
-      <div class="gallery-caption">Інтер'єр SF90</div>
-    </div>
-
     <div class="gallery-full-item" data-category="racing"
-         onclick="openModal('🏁', 'Формула 1 — Scuderia Ferrari', 'Червоний болид Scuderia Ferrari — найвпізнаваніший автомобіль в історії гоночного спорту. 16 чемпіонських титулів свідчать самі за себе.')">
-      🏁
-      <div class="gallery-caption">Scuderia F1</div>
+         data-img="https://upload.wikimedia.org/wikipedia/commons/e/e0/FIA_F1_Austria_2024_Nr._16_Leclerc.jpg"
+         data-title="Scuderia Ferrari — Австрія 2024"
+         data-desc="Шарль Леклер у червоному болиді Ferrari SF-24 на Гран-прі Австрії 2024. Ferrari — найстаріша і найтитулованіша команда Формули 1."
+         onclick="openModal(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/FIA_F1_Austria_2024_Nr._16_Leclerc.jpg" alt="Ferrari F1 Leclerc Austria 2024">
+      <div class="gallery-caption">Scuderia Ferrari F1</div>
     </div>
 
     <div class="gallery-full-item" data-category="classic"
-         onclick="openModal('🚗', 'Ferrari 250 GTO — 1962', 'Найдорожчий автомобіль у світі. Ferrari 250 GTO 1962 року — вершина автомобільного мистецтва, витвір Серджо Скальєтті.')">
-      🚗
-      <div class="gallery-caption">250 GTO — 1962</div>
-    </div>
-
-    <div class="gallery-full-item" data-category="exterior"
-         onclick="openModal('🔴', 'Ferrari Testarossa — 1984', 'Testarossa з її характерними бічними ребрами стала іконою 80-х. Широкі бокові повітрозабірники охолоджують потужний двигун V12.')">
-      🔴
-      <div class="gallery-caption">Testarossa — 1984</div>
-    </div>
-
-    <div class="gallery-full-item" data-category="exterior"
-         onclick="openModal('⚡', 'LaFerrari — 2013', 'Гібридний гіперкар з активними аеродинамічними елементами. Карбоновий корпус, 963 к.с. та технології пряму з Формули 1 — це LaFerrari.')">
-      ⚡
-      <div class="gallery-caption">LaFerrari — 2013</div>
-    </div>
-
-    <div class="gallery-full-item" data-category="interior"
-         onclick="openModal('⚙️', 'Двигун V12', 'Атмосферний двигун V12 Ferrari — серце найпотужніших моделей. Ручна збірка, 9000 об/хв та звук, який неможливо забути.')">
-      ⚙️
-      <div class="gallery-caption">Двигун V12</div>
-    </div>
-
-    <div class="gallery-full-item" data-category="racing"
-         onclick="openModal('🏆', 'Ferrari F40 — 1987', 'До 40-річчя бренду. Енцо Феррарі особисто затвердив дизайн F40 — першого серійного автомобіля, що перевищив 320 км/год.')">
-      🏆
+         data-img="https://upload.wikimedia.org/wikipedia/commons/5/5c/Ferrari_F40.jpg"
+         data-title="Ferrari F40 — 1987"
+         data-desc="До 40-річчя бренду. Енцо Феррарі особисто затвердив дизайн F40 — першого серійного автомобіля, що перевищив 320 км/год."
+         onclick="openModal(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Ferrari_F40.jpg" alt="Ferrari F40">
       <div class="gallery-caption">Ferrari F40 — 1987</div>
     </div>
 
     <div class="gallery-full-item" data-category="classic"
-         onclick="openModal('🌟', 'Ferrari Enzo — 2002', 'Названий на честь засновника. 660 к.с., карбонове шасі від F1 та обмежений тираж у 400 екземплярів роблять Enzo легендою.')">
-      🌟
+         data-img="https://upload.wikimedia.org/wikipedia/commons/a/a4/Ferrari_Enzo_Ferrari.jpg"
+         data-title="Ferrari Enzo — 2002"
+         data-desc="Названий на честь засновника. 660 к.с., карбонове шасі від F1 та обмежений тираж у 400 екземплярів роблять Enzo легендою."
+         onclick="openModal(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Ferrari_Enzo_Ferrari.jpg" alt="Ferrari Enzo">
       <div class="gallery-caption">Ferrari Enzo — 2002</div>
+    </div>
+
+    <div class="gallery-full-item" data-category="exterior"
+         data-img="https://images.unsplash.com/photo-1597687190402-bd767ac2ce81?w=1200&q=90"
+         data-title="LaFerrari — 2013"
+         data-desc="Гібридний гіперкар з активними аеродинамічними елементами. Карбоновий корпус, 963 к.с. та технології прямо з Формули 1."
+         onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1597687190402-bd767ac2ce81?w=800&q=80" alt="LaFerrari">
+      <div class="gallery-caption">LaFerrari — 2013</div>
+    </div>
+
+    <div class="gallery-full-item" data-category="classic"
+         data-img="https://upload.wikimedia.org/wikipedia/commons/4/41/Ferrari_Testarossa_%28white%29.jpg"
+         data-title="Ferrari Testarossa — 1984"
+         data-desc="Testarossa з її характерними бічними ребрами стала іконою 80-х. Широкі бокові повітрозабірники охолоджують потужний двигун V12."
+         onclick="openModal(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Ferrari_Testarossa_%28white%29.jpg" alt="Ferrari Testarossa">
+      <div class="gallery-caption">Testarossa — 1984</div>
+    </div>
+
+    <div class="gallery-full-item" data-category="exterior"
+         data-img="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?w=1200&q=90"
+         data-title="Ferrari F8 Tributo"
+         data-desc="F8 Tributo — данина поваги найвидатнішим двигунам V8 Ferrari. 720 к.с. та час 0-100 км/год за 2.9 секунди."
+         onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?w=800&q=80" alt="Ferrari F8 Tributo">
+      <div class="gallery-caption">Ferrari F8 Tributo</div>
+    </div>
+
+    <div class="gallery-full-item" data-category="racing"
+         data-img="https://upload.wikimedia.org/wikipedia/commons/2/27/Charles_Leclerc_Silverstone_2018.jpg"
+         data-title="Charles Leclerc — Сільверстоун"
+         data-desc="Шарль Леклер на трасі Сільверстоун. Монегаський гонщик є лідером Scuderia Ferrari і одним з найяскравіших талантів сучасної Формули 1."
+         onclick="openModal(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Charles_Leclerc_Silverstone_2018.jpg" alt="Charles Leclerc">
+      <div class="gallery-caption">Charles Leclerc</div>
+    </div>
+
+    <div class="gallery-full-item" data-category="racing"
+         data-img="https://upload.wikimedia.org/wikipedia/commons/2/21/Lewis_Hamilton_2021.jpg"
+         data-title="Lewis Hamilton — 7× Чемпіон"
+         data-desc="Льюїс Хемілтон — найтитулованіший гонщик в історії Формули 1. З 2025 року виступає за Scuderia Ferrari, мрію всього свого життя."
+         onclick="openModal(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Lewis_Hamilton_2021.jpg" alt="Lewis Hamilton">
+      <div class="gallery-caption">Lewis Hamilton</div>
     </div>
 
   </div>
@@ -137,7 +170,7 @@
 <div class="modal" id="modal" onclick="closeModal(event)">
   <button class="modal-close" onclick="closeModal()">&times;</button>
   <div class="modal-content">
-    <div class="modal-emoji" id="modal-emoji"></div>
+    <img class="modal-img" id="modal-img" src="" alt="">
     <div class="modal-title" id="modal-title"></div>
     <div class="modal-desc" id="modal-desc"></div>
   </div>
@@ -165,6 +198,7 @@
       <h4>Компанія</h4>
       <ul>
         <li><a href="technologies.html">Технології</a></li>
+        <li><a href="team.html">Команда F1</a></li>
         <li><a href="contact.html">Контакти</a></li>
       </ul>
     </div>
@@ -177,16 +211,17 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2024 Ferrari S.p.A. Усі права захищені.</p>
+    <p>&copy; 2026 Ferrari S.p.A. Усі права захищені.</p>
     <p>Маранелло, Модена, Італія</p>
   </div>
 </footer>
 
 <script>
-function openModal(emoji, title, desc) {
-  document.getElementById('modal-emoji').textContent = emoji;
-  document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-desc').textContent = desc;
+function openModal(el) {
+  document.getElementById('modal-img').src = el.dataset.img;
+  document.getElementById('modal-img').alt = el.dataset.title;
+  document.getElementById('modal-title').textContent = el.dataset.title;
+  document.getElementById('modal-desc').textContent = el.dataset.desc;
   document.getElementById('modal').classList.add('open');
 }
 function closeModal(e) {
@@ -199,7 +234,7 @@ function filterGallery(category, btn) {
   btn.classList.add('active');
   document.querySelectorAll('.gallery-full-item').forEach(item => {
     if (category === 'all' || item.dataset.category === category) {
-      item.style.display = 'flex';
+      item.style.display = '';
     } else {
       item.style.display = 'none';
     }
