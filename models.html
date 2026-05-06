@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Моделі — Ferrari</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">F</div>
+    <span>Ferrari</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Головна</a></li>
+    <li><a href="models.html" class="active">Моделі</a></li>
+    <li><a href="history.html">Історія</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="technologies.html">Технології</a></li>
+    <li><a href="contact.html">Контакти</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero" style="padding-top: 100px;">
+  <div class="page-hero-content">
+    <div class="section-label">Лінійка автомобілів</div>
+    <h1>Наші Моделі</h1>
+    <p>Кожен автомобіль — шедевр інженерного мистецтва, створений для неперевершених вражень.</p>
+  </div>
+</div>
+
+<section class="models-page" style="padding: 60px;">
+  <div class="models-filter">
+    <button class="filter-btn active" onclick="filterModels('all', this)">Усі</button>
+    <button class="filter-btn" onclick="filterModels('supercar', this)">Суперкари</button>
+    <button class="filter-btn" onclick="filterModels('gt', this)">GT</button>
+    <button class="filter-btn" onclick="filterModels('hybrid', this)">Гібриди</button>
+    <button class="filter-btn" onclick="filterModels('hypercar', this)">Гіперкари</button>
+  </div>
+
+  <div class="models-full-grid">
+
+    <div class="model-full-card" data-category="hybrid">
+      <div class="car-emoji" style="background: linear-gradient(135deg, #1a0000, #0a0a0a);">🏎️</div>
+      <div class="card-body">
+        <h3>Ferrari 296 GTB</h3>
+        <div class="category">Гібрид · Суперкар</div>
+        <table class="specs-table">
+          <tr><td>Двигун</td><td>V6 + електро</td></tr>
+          <tr><td>Потужність</td><td>830 к.с.</td></tr>
+          <tr><td>0–100 км/год</td><td>2.9 сек</td></tr>
+          <tr><td>Макс. швидкість</td><td>330 км/год</td></tr>
+          <tr><td>Об'єм двигуна</td><td>2992 куб.см</td></tr>
+        </table>
+        <div class="card-price">
+          <span class="price">від €322 000</span>
+          <a href="contact.html" class="btn-primary" style="padding:10px 20px; font-size:0.78rem;">Запит</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-full-card" data-category="hybrid">
+      <div class="car-emoji" style="background: linear-gradient(135deg, #0a0a1a, #1a1a00);">⚡</div>
+      <div class="card-body">
+        <h3>SF90 Stradale</h3>
+        <div class="category">Гібрид · Флагман</div>
+        <table class="specs-table">
+          <tr><td>Двигун</td><td>V8 + 3 електро</td></tr>
+          <tr><td>Потужність</td><td>1000 к.с.</td></tr>
+          <tr><td>0–100 км/год</td><td>2.5 сек</td></tr>
+          <tr><td>Макс. швидкість</td><td>340 км/год</td></tr>
+          <tr><td>Об'єм двигуна</td><td>3990 куб.см</td></tr>
+        </table>
+        <div class="card-price">
+          <span class="price">від €507 000</span>
+          <a href="contact.html" class="btn-primary" style="padding:10px 20px; font-size:0.78rem;">Запит</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-full-card" data-category="gt">
+      <div class="car-emoji" style="background: linear-gradient(135deg, #001a00, #0a0a0a);">🚗</div>
+      <div class="card-body">
+        <h3>Ferrari Roma</h3>
+        <div class="category">GT · Гран Туризмо</div>
+        <table class="specs-table">
+          <tr><td>Двигун</td><td>V8 Twin-Turbo</td></tr>
+          <tr><td>Потужність</td><td>620 к.с.</td></tr>
+          <tr><td>0–100 км/год</td><td>3.4 сек</td></tr>
+          <tr><td>Макс. швидкість</td><td>320 км/год</td></tr>
+          <tr><td>Об'єм двигуна</td><td>3855 куб.см</td></tr>
+        </table>
+        <div class="card-price">
+          <span class="price">від €229 000</span>
+          <a href="contact.html" class="btn-primary" style="padding:10px 20px; font-size:0.78rem;">Запит</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-full-card" data-category="supercar">
+      <div class="car-emoji" style="background: linear-gradient(135deg, #1a1000, #0a0500);">🔥</div>
+      <div class="card-body">
+        <h3>Ferrari F8 Tributo</h3>
+        <div class="category">Суперкар</div>
+        <table class="specs-table">
+          <tr><td>Двигун</td><td>V8 Twin-Turbo</td></tr>
+          <tr><td>Потужність</td><td>720 к.с.</td></tr>
+          <tr><td>0–100 км/год</td><td>2.9 сек</td></tr>
+          <tr><td>Макс. швидкість</td><td>340 км/год</td></tr>
+          <tr><td>Об'єм двигуна</td><td>3902 куб.см</td></tr>
+        </table>
+        <div class="card-price">
+          <span class="price">від €264 000</span>
+          <a href="contact.html" class="btn-primary" style="padding:10px 20px; font-size:0.78rem;">Запит</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-full-card" data-category="hypercar">
+      <div class="car-emoji" style="background: linear-gradient(135deg, #0a001a, #1a0000);">💎</div>
+      <div class="card-body">
+        <h3>LaFerrari</h3>
+        <div class="category">Гіперкар · Лімітована серія</div>
+        <table class="specs-table">
+          <tr><td>Двигун</td><td>V12 + KERS</td></tr>
+          <tr><td>Потужність</td><td>963 к.с.</td></tr>
+          <tr><td>0–100 км/год</td><td>2.4 сек</td></tr>
+          <tr><td>Макс. швидкість</td><td>350 км/год</td></tr>
+          <tr><td>Кількість</td><td>499 шт.</td></tr>
+        </table>
+        <div class="card-price">
+          <span class="price">€1 300 000+</span>
+          <a href="contact.html" class="btn-primary" style="padding:10px 20px; font-size:0.78rem;">Запит</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-full-card" data-category="gt">
+      <div class="car-emoji" style="background: linear-gradient(135deg, #001a1a, #0a0a0a);">🌟</div>
+      <div class="card-body">
+        <h3>Ferrari Portofino M</h3>
+        <div class="category">GT · Кабріолет</div>
+        <table class="specs-table">
+          <tr><td>Двигун</td><td>V8 Twin-Turbo</td></tr>
+          <tr><td>Потужність</td><td>620 к.с.</td></tr>
+          <tr><td>0–100 км/год</td><td>3.45 сек</td></tr>
+          <tr><td>Макс. швидкість</td><td>320 км/год</td></tr>
+          <tr><td>Кузов</td><td>Кабріолет</td></tr>
+        </table>
+        <div class="card-price">
+          <span class="price">від €234 000</span>
+          <a href="contact.html" class="btn-primary" style="padding:10px 20px; font-size:0.78rem;">Запит</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="logo-icon">F</div>
+        <span style="font-size:1.3rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;">Ferrari</span>
+      </div>
+      <p>Виробник спортивних автомобілів класу люкс з 1947 року.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Навігація</h4>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="models.html">Моделі</a></li>
+        <li><a href="history.html">Історія</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компанія</h4>
+      <ul>
+        <li><a href="technologies.html">Технології</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакти</h4>
+      <ul>
+        <li><a href="#">Маранелло, Італія</a></li>
+        <li><a href="#">info@ferrari.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Ferrari S.p.A. Усі права захищені.</p>
+    <p>Маранелло, Модена, Італія</p>
+  </div>
+</footer>
+
+<script>
+function filterModels(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.model-full-card').forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>

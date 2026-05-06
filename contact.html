@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакти — Ferrari</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .success-msg {
+      display: none;
+      background: rgba(0,180,0,0.1);
+      border: 1px solid rgba(0,180,0,0.3);
+      color: #4caf50;
+      padding: 16px 24px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    .map-placeholder {
+      background: var(--gray);
+      border: 1px solid rgba(255,255,255,0.06);
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(204,0,0,0.05) 0%, transparent 70%);
+    }
+    .map-icon { font-size: 4rem; }
+    .map-label { color: #666; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">F</div>
+    <span>Ferrari</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Головна</a></li>
+    <li><a href="models.html">Моделі</a></li>
+    <li><a href="history.html">Історія</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="technologies.html">Технології</a></li>
+    <li><a href="contact.html" class="active">Контакти</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero" style="padding-top: 100px;">
+  <div class="page-hero-content">
+    <div class="section-label">Зв'яжіться з нами</div>
+    <h1>Контакти</h1>
+    <p>Наша команда готова відповісти на всі ваші запитання щодо автомобілів Ferrari.</p>
+  </div>
+</div>
+
+<section class="contact-full" style="padding: 80px 60px;">
+
+  <div class="contact-info">
+    <div class="section-label">Де нас знайти</div>
+    <h2 class="section-title" style="margin-bottom: 40px;">Маранелло,<br>Серце Ferrari</h2>
+
+    <div class="info-item">
+      <div class="info-icon">📍</div>
+      <div class="info-text">
+        <h4>Адреса</h4>
+        <p>Via Abetone Inferiore 4<br>41053 Маранелло, Модена<br>Італія</p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-icon">📞</div>
+      <div class="info-text">
+        <h4>Телефон</h4>
+        <p>+39 0536 949 111<br>Пн–Пт: 9:00 — 18:00 (CET)</p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-icon">✉️</div>
+      <div class="info-text">
+        <h4>Email</h4>
+        <p>info@ferrari.com<br>press@ferrari.com (медіа запити)</p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-icon">🏭</div>
+      <div class="info-text">
+        <h4>Музей Ferrari</h4>
+        <p>Museo Ferrari — Via Dino Ferrari 43<br>Відкритий щодня 9:00–19:00<br>Вхід: €18 для дорослих</p>
+      </div>
+    </div>
+
+    <div class="info-item" style="border-bottom: none;">
+      <div class="info-icon">🌐</div>
+      <div class="info-text">
+        <h4>Соціальні мережі</h4>
+        <p>Instagram: @ferrari<br>YouTube: Ferrari<br>Twitter/X: @Ferrari</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <h3>Надіслати Запит</h3>
+    <form onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ім'я</label>
+          <input type="text" placeholder="Ваше ім'я" required>
+        </div>
+        <div class="form-group">
+          <label>Прізвище</label>
+          <input type="text" placeholder="Ваше прізвище" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>Телефон</label>
+        <input type="tel" placeholder="+380 XX XXX XX XX">
+      </div>
+      <div class="form-group">
+        <label>Тема запиту</label>
+        <select required>
+          <option value="" disabled selected>Оберіть тему</option>
+          <option>Придбання автомобіля</option>
+          <option>Тест-драйв</option>
+          <option>Технічне обслуговування</option>
+          <option>Програма Ferrari Classiche</option>
+          <option>Гоночна програма</option>
+          <option>Інше</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Повідомлення</label>
+        <textarea placeholder="Розкажіть детально про ваш запит..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%;">Надіслати повідомлення</button>
+      <div class="success-msg" id="success-msg">
+        &#10003; Ваш запит успішно надіслано! Ми зв'яжемось з вами протягом 24 годин.
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<section style="padding: 0 60px 80px; background: var(--black);">
+  <div class="map-placeholder">
+    <div class="map-icon">📍</div>
+    <div class="map-label">Маранелло, Модена, Італія</div>
+    <div style="color: #444; font-size: 0.8rem;">Via Abetone Inferiore 4 · 44°31'55"N 10°51'57"E</div>
+  </div>
+</section>
+
+<section style="background: var(--red); padding: 80px 60px; text-align: center;">
+  <div class="section-label" style="color: rgba(255,255,255,0.7);">Досвід Ferrari</div>
+  <h2 style="font-size: 2.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px;">Запишіться на<br>Тест-Драйв</h2>
+  <p style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 40px; line-height: 1.8;">Відчуйте різницю особисто — наші консультанти проведуть вас через весь досвід Ferrari, від вибору комплектації до ключів у руках.</p>
+  <a href="#" onclick="document.querySelector('input[type=text]').focus(); return false;" class="btn-secondary" style="border-color: rgba(255,255,255,0.5); color: white;">Записатись зараз</a>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="logo-icon">F</div>
+        <span style="font-size:1.3rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;">Ferrari</span>
+      </div>
+      <p>Виробник спортивних автомобілів класу люкс з 1947 року.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Навігація</h4>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="models.html">Моделі</a></li>
+        <li><a href="history.html">Історія</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компанія</h4>
+      <ul>
+        <li><a href="technologies.html">Технології</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакти</h4>
+      <ul>
+        <li><a href="#">Маранелло, Італія</a></li>
+        <li><a href="#">info@ferrari.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Ferrari S.p.A. Усі права захищені.</p>
+    <p>Маранелло, Модена, Італія</p>
+  </div>
+</footer>
+
+<script>
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('success-msg').style.display = 'block';
+  e.target.reset();
+  setTimeout(() => {
+    document.getElementById('success-msg').style.display = 'none';
+  }, 5000);
+}
+</script>
+
+</body>
+</html>
